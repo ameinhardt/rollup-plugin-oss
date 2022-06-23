@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@ameinhardt/eslint-config': ameinhardt/eslint-config#semver:^0.1.0
+  '@ameinhardt/eslint-config': ameinhardt/eslint-config#semver:^0.1.1
   '@rollup/plugin-commonjs': ^22.0.0
   '@rollup/plugin-json': ^4.1.0
   '@rollup/plugin-node-resolve': ^13.3.0
@@ -10,7 +10,7 @@ specifiers:
   eslint: ^8.18.0
   lint-staged: ^13.0.2
   rollup: ^2.75.7
-  rollup-plugin-oss: ameinhardt/rollup-plugin-oss#semver:^0.1.0
+  rollup-plugin-oss: ameinhardt/rollup-plugin-oss#semver:^0.1.1
   spdx-license-list: ^6.6.0
   tslib: ^2.4.0
   typescript: ^4.7.4
@@ -21,7 +21,7 @@ dependencies:
   zip-stream: 4.1.0
 
 devDependencies:
-  '@ameinhardt/eslint-config': github.com/ameinhardt/eslint-config/5e5d48680ed178ca9b6fba73f6990ac4e5956bed_eslint@8.18.0
+  '@ameinhardt/eslint-config': github.com/ameinhardt/eslint-config/2b66373a20a124d5903a2617c4eb8fa97d96f2b7_eslint@8.18.0
   '@rollup/plugin-commonjs': 22.0.0_rollup@2.75.7
   '@rollup/plugin-json': 4.1.0_rollup@2.75.7
   '@rollup/plugin-node-resolve': 13.3.0_rollup@2.75.7
@@ -30,7 +30,7 @@ devDependencies:
   eslint: 8.18.0
   lint-staged: 13.0.2
   rollup: 2.75.7
-  rollup-plugin-oss: github.com/ameinhardt/rollup-plugin-oss/f2434dfb0d84ea450b9be087bdeb15990ca68758_rollup@2.75.7
+  rollup-plugin-oss: github.com/ameinhardt/rollup-plugin-oss/d525d70a82a68c5fdfb770f3aaebe9814d48c0df_rollup@2.75.7
   tslib: 2.4.0
   typescript: 4.7.4
 
@@ -2990,11 +2990,11 @@ packages:
       compress-commons: 4.1.1
       readable-stream: 3.6.0
 
-  github.com/ameinhardt/eslint-config/5e5d48680ed178ca9b6fba73f6990ac4e5956bed_eslint@8.18.0:
-    resolution: {tarball: https://codeload.github.com/ameinhardt/eslint-config/tar.gz/5e5d48680ed178ca9b6fba73f6990ac4e5956bed}
-    id: github.com/ameinhardt/eslint-config/5e5d48680ed178ca9b6fba73f6990ac4e5956bed
+  github.com/ameinhardt/eslint-config/2b66373a20a124d5903a2617c4eb8fa97d96f2b7_eslint@8.18.0:
+    resolution: {tarball: https://codeload.github.com/ameinhardt/eslint-config/tar.gz/2b66373a20a124d5903a2617c4eb8fa97d96f2b7}
+    id: github.com/ameinhardt/eslint-config/2b66373a20a124d5903a2617c4eb8fa97d96f2b7
     name: '@ameinhardt/eslint-config'
-    version: 0.1.0
+    version: 0.1.1
     dependencies:
       '@typescript-eslint/eslint-plugin': 5.29.0_qqmbkyiaixvppdwswpytuf2hgm
       '@typescript-eslint/parser': 5.29.0_b5e7v2qnwxfo6hmiq56u52mz3e
@@ -3022,11 +3022,11 @@ packages:
       - webpack-cli
     dev: true
 
-  github.com/ameinhardt/rollup-plugin-oss/f2434dfb0d84ea450b9be087bdeb15990ca68758_rollup@2.75.7:
-    resolution: {tarball: https://codeload.github.com/ameinhardt/rollup-plugin-oss/tar.gz/f2434dfb0d84ea450b9be087bdeb15990ca68758}
-    id: github.com/ameinhardt/rollup-plugin-oss/f2434dfb0d84ea450b9be087bdeb15990ca68758
+  github.com/ameinhardt/rollup-plugin-oss/d525d70a82a68c5fdfb770f3aaebe9814d48c0df_rollup@2.75.7:
+    resolution: {tarball: https://codeload.github.com/ameinhardt/rollup-plugin-oss/tar.gz/d525d70a82a68c5fdfb770f3aaebe9814d48c0df}
+    id: github.com/ameinhardt/rollup-plugin-oss/d525d70a82a68c5fdfb770f3aaebe9814d48c0df
     name: rollup-plugin-oss
-    version: 0.1.0
+    version: 0.1.1
     peerDependencies:
       rollup: ^1.0.0 || ^2.0.0
     dependencies:

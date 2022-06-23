@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-oss",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "A rollup plugin to list dependency licenses and zip source files",
   "author": "Axel Meinhardt <26243798+ameinhardt@users.noreply.github.com>",
@@ -10,6 +10,10 @@
     "rollup",
     "rollup-plugin"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ameinhardt/rollup-plugin-oss.git"
+  },
   "main": "index.js",
   "scripts": {
     "lint": "eslint --fix --ext .js,.ts,.json .",
@@ -25,7 +29,7 @@
     "zip-stream": "^4.1.0"
   },
   "devDependencies": {
-    "@ameinhardt/eslint-config": "ameinhardt/eslint-config#semver:^0.1.0",
+    "@ameinhardt/eslint-config": "ameinhardt/eslint-config#semver:^0.1.1",
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
@@ -34,7 +38,7 @@
     "eslint": "^8.18.0",
     "lint-staged": "^13.0.2",
     "rollup": "^2.75.7",
-    "rollup-plugin-oss": "ameinhardt/rollup-plugin-oss#semver:^0.1.0",
+    "rollup-plugin-oss": "ameinhardt/rollup-plugin-oss#semver:^0.1.2",
     "tslib": "^2.4.0",
     "typescript": "^4.7.4"
   },
