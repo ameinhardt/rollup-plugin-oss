@@ -10,7 +10,7 @@ specifiers:
   eslint: ^8.18.0
   lint-staged: ^13.0.2
   rollup: ^2.75.7
-  rollup-plugin-oss: ameinhardt/rollup-plugin-oss#semver:^0.1.1
+  rollup-plugin-oss: file:.
   spdx-license-list: ^6.6.0
   tslib: ^2.4.0
   typescript: ^4.7.4
@@ -22,15 +22,15 @@ dependencies:
 
 devDependencies:
   '@ameinhardt/eslint-config': github.com/ameinhardt/eslint-config/2b66373a20a124d5903a2617c4eb8fa97d96f2b7_eslint@8.18.0
-  '@rollup/plugin-commonjs': 22.0.0_rollup@2.75.7
+  '@rollup/plugin-commonjs': 22.0.1_rollup@2.75.7
   '@rollup/plugin-json': 4.1.0_rollup@2.75.7
   '@rollup/plugin-node-resolve': 13.3.0_rollup@2.75.7
   '@rollup/plugin-typescript': 8.3.3_g4qkabtmybowem44p7ts7jnbqm
   '@types/node': 18.0.0
   eslint: 8.18.0
-  lint-staged: 13.0.2
+  lint-staged: 13.0.3
   rollup: 2.75.7
-  rollup-plugin-oss: github.com/ameinhardt/rollup-plugin-oss/d525d70a82a68c5fdfb770f3aaebe9814d48c0df_rollup@2.75.7
+  rollup-plugin-oss: file:_rollup@2.75.7
   tslib: 2.4.0
   typescript: 4.7.4
 
@@ -147,8 +147,8 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@rollup/plugin-commonjs/22.0.0_rollup@2.75.7:
-    resolution: {integrity: sha512-Ktvf2j+bAO+30awhbYoCaXpBcyPmJbaEUYClQns/+6SNCYFURbvBiNbWgHITEsIgDDWCDUclWRKEuf8cwZCFoQ==}
+  /@rollup/plugin-commonjs/22.0.1_rollup@2.75.7:
+    resolution: {integrity: sha512-dGfEZvdjDHObBiP5IvwTKMVeq/tBZGMBHZFMdIV1ClMM/YoWS34xrHFGfag9SN2ZtMgNZRFruqvxZQEa70O6nQ==}
     engines: {node: '>= 12.0.0'}
     peerDependencies:
       rollup: ^2.68.0
@@ -710,8 +710,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001358
-      electron-to-chromium: 1.4.167
+      caniuse-lite: 1.0.30001359
+      electron-to-chromium: 1.4.169
       node-releases: 2.0.5
       update-browserslist-db: 1.0.4_browserslist@4.21.0
     dev: true
@@ -746,8 +746,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /caniuse-lite/1.0.30001358:
-    resolution: {integrity: sha512-hvp8PSRymk85R20bsDra7ZTCpSVGN/PAz9pSAjPSjKC+rNmnUk5vCRgJwiTT/O4feQ/yu/drvZYpKxxhbFuChw==}
+  /caniuse-lite/1.0.30001359:
+    resolution: {integrity: sha512-Xln/BAsPzEuiVLgJ2/45IaqD9jShtk3Y33anKb4+yLwQzws3+v6odKfpgES/cDEaZMLzSChpIGdbOYtH9MyuHw==}
     dev: true
 
   /chalk/2.4.2:
@@ -967,8 +967,8 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /electron-to-chromium/1.4.167:
-    resolution: {integrity: sha512-lPHuHXBwpkr4RcfaZBKm6TKOWG/1N9mVggUpP4fY3l1JIUU2x4fkM8928smYdZ5lF+6KCTAxo1aK9JmqT+X71Q==}
+  /electron-to-chromium/1.4.169:
+    resolution: {integrity: sha512-Yb7UFva1sLlAaRyCkgoFF3qWvwZacFDtsGKi44rZsk8vnhL0DMhsUdhI4Dz9CCJQfftncDMGSI3AYiDtg8mD/w==}
     dev: true
 
   /emoji-regex/8.0.0:
@@ -1910,8 +1910,8 @@ packages:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
     dev: true
 
-  /lint-staged/13.0.2:
-    resolution: {integrity: sha512-qQLfLTh9z34eMzfEHENC+QBskZfxjomrf+snF3xJ4BzilORbD989NLqQ00ughsF/A+PT41e87+WsMFabf9++pQ==}
+  /lint-staged/13.0.3:
+    resolution: {integrity: sha512-9hmrwSCFroTSYLjflGI8Uk+GWAwMB4OlpU4bMJEAT5d/llQwtYKoim4bLOyLCuWFAhWEupE0vkIFqtw/WIsPug==}
     engines: {node: ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
@@ -2990,6 +2990,19 @@ packages:
       compress-commons: 4.1.1
       readable-stream: 3.6.0
 
+  file:_rollup@2.75.7:
+    resolution: {directory: '', type: directory}
+    id: 'file:'
+    name: rollup-plugin-oss
+    version: 0.1.4
+    peerDependencies:
+      rollup: ^1.0.0 || ^2.0.0
+    dependencies:
+      rollup: 2.75.7
+      spdx-license-list: 6.6.0
+      zip-stream: 4.1.0
+    dev: true
+
   github.com/ameinhardt/eslint-config/2b66373a20a124d5903a2617c4eb8fa97d96f2b7_eslint@8.18.0:
     resolution: {tarball: https://codeload.github.com/ameinhardt/eslint-config/tar.gz/2b66373a20a124d5903a2617c4eb8fa97d96f2b7}
     id: github.com/ameinhardt/eslint-config/2b66373a20a124d5903a2617c4eb8fa97d96f2b7
@@ -3020,17 +3033,4 @@ packages:
       - supports-color
       - uglify-js
       - webpack-cli
-    dev: true
-
-  github.com/ameinhardt/rollup-plugin-oss/d525d70a82a68c5fdfb770f3aaebe9814d48c0df_rollup@2.75.7:
-    resolution: {tarball: https://codeload.github.com/ameinhardt/rollup-plugin-oss/tar.gz/d525d70a82a68c5fdfb770f3aaebe9814d48c0df}
-    id: github.com/ameinhardt/rollup-plugin-oss/d525d70a82a68c5fdfb770f3aaebe9814d48c0df
-    name: rollup-plugin-oss
-    version: 0.1.1
-    peerDependencies:
-      rollup: ^1.0.0 || ^2.0.0
-    dependencies:
-      rollup: 2.75.7
-      spdx-license-list: 6.6.0
-      zip-stream: 4.1.0
     dev: true
