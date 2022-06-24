@@ -12,7 +12,11 @@ The behavior is similiar to [license-checker-webpack-plugin](https://github.com/
 Please note that circular dependencies can occur in general, when bundling. For further discussion, see https://github.com/nodejs/readable-stream/issues/348
 
 ## Usage
-add a rollup/vite config (e.g. rollup.config.js) to your project. Add `filter` to hide dependencies or add `extra` manually.
+Install this package as development dependency
+```bash
+npm install -D rollup-plugin-oss
+```
+Add a rollup/vite config (e.g. rollup.config.js) to your project. Add `filter` to hide dependencies or add `extra` manually.
 ```javascript
 import LicensePlugin from 'rollup-plugin-oss';
 export default {
@@ -40,7 +44,12 @@ export default {
 ```
 
 ## Example output
-This is the `disclosure.json` of this library. It's produced by `pnpm run build && pnpm run bundle`
+Get an example output for this library by running cloning the repository
+```
+npm install
+npm run bundle
+```
+In `./dist` folder, you'll get a `disclosure.json` file with:
 ```json
 {
   "libraries": [
@@ -52,7 +61,8 @@ This is the `disclosure.json` of this library. It's produced by `pnpm run build 
       "licenseText": "Copyright (c) Microsoft Corporation.\r\n\r\nPermission to use, copy, modify, and/or distribute this software for any\r\npurpose with or without fee is hereby granted.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH\r\nREGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY\r\nAND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,\r\nINDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM\r\nLOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR\r\nOTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR\r\nPERFORMANCE OF THIS SOFTWARE.",
       "repository": "https://github.com/Microsoft/tslib",
       "description": "Runtime library for TypeScript helper functions"
-    }
+    },
+    ...
   ]
 }
 ```

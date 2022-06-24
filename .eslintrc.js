@@ -5,5 +5,8 @@ module.exports = {
   },
   extends: [
     '@ameinhardt/eslint-config/typescript'
-  ]
+  ],
+  rules: {
+    'no-console': ['error', { allow: ['warn', 'error'] }]
+  }
 };
