@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`gets a respository url from package attribute #1 npm/npm 1`] = `"https://github.com/npm/npm"`;
+
+exports[`gets a respository url from package attribute #2 github:user/repo 1`] = `"https://github.com/user/repo"`;
+
+exports[`gets a respository url from package attribute #3 gist:11081aaa281 1`] = `"https://gist.github.com/11081aaa281"`;
+
+exports[`gets a respository url from package attribute #4 bitbucket:user/repo 1`] = `"https://bitbucket.org/user/repo"`;
+
+exports[`gets a respository url from package attribute #5 gitlab:user/repo 1`] = `"https://gitlab.com/user/repo"`;
+
+exports[`gets a respository url from package attribute #6 object 1`] = `""`;
+
+exports[`gets a respository url from package attribute #7 object 1`] = `"https://github.com/npm/cli"`;
+
+exports[`gets a respository url from package attribute #8 object 1`] = `"https://github.com/facebook/react"`;

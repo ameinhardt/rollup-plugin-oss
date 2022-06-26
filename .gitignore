@@ -2,3 +2,8 @@ node_modules*
 dist/
 .npmrc
 .rollup.cache
+example/
+spdxExpression.*ts
+spdxExpression.js
+index.js
+spdx.json
