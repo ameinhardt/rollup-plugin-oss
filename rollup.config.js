@@ -10,7 +10,7 @@ export default {
   input: './index.ts',
   external: [...builtinModules.flatMap(p => [p, `node:${p}`])],
   output: {
-    dir: './dist',
+    dir: './example',
     exports: 'named',
     format: 'cjs'
   },
@@ -25,6 +25,15 @@ export default {
       target: 'ES6',
       declaration: false
     }),
-    LicensePlugin()
+    LicensePlugin({
+      extra: [{
+        license: 'CC0-1.0',
+        name: 'license-list-xml',
+        repository: 'https://github.com/spdx/license-list-XML',
+        version: '2.6.0',
+        author: 'Linux Foundation and its Contributors',
+        description: 'The SPDX License List is a list of commonly found licenses and exceptions used for open source and other collaborative software.  The XML format is an internal representation of the licenses.  See the license-list-data for supported formats for the license list.'
+      }]
+    })
   ]
 };

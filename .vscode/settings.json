@@ -1,0 +1,29 @@
+{
+  "files.exclude": {
+    "**/dist": true
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "eslint.run": "onSave",
+  "eslint.lintTask.enable": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.trimAutoWhitespace": true,
+  "git.alwaysSignOff": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": false,
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "html",
+    "vue",
+    "json",
+    "jsonc",
+    "json5"
+  ],
+  "jest.jestCommandLine": "jest"
+}
