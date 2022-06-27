@@ -7,11 +7,12 @@ import nearley from 'nearley';
 import { OutputPlugin } from 'rollup';
 import Packer from 'zip-stream';
 import spdxExpression from './spdxExpression';
-import { LicenseDependency, License, PluginConfig, Repository, SpdxInfo, LicenseInfo, ConjuctionInfo, LicenseDatabase } from './types';
+import { LicenseDependency, PluginConfig, Repository, SpdxInfo, LicenseInfo, ConjuctionInfo, LicenseDatabase } from './types';
 
 const moduleRe = /^(.*[/\\]node_modules[/\\]((?:@[^/\\]+[/\\])?[^/\\]+))[/\\]([^#?]+)/,
   licenseRe = /^li[cs]ense/i,
-  spdxData = readFileSync('./spdx.json'),
+  // eslint-disable-next-line unicorn/prefer-module
+  spdxData = readFileSync(join(__dirname, '/spdx.json')),
   spdxLicenseList : LicenseDatabase = JSON.parse(spdxData.toString());
 
 function * flatten(ast: SpdxInfo, key: 'license' | 'conjunction') : Generator<SpdxInfo> {
