@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`gets text for license definition ignore filtered package 1`] = `
-Array [
-  Object {
+[
+  {
     "author": "Microsoft Corp.",
     "description": "Runtime library for TypeScript helper functions",
     "license": "0BSD",
@@ -11,7 +11,7 @@ Array [
 Permission to use, copy, modify, and/or distribute this software for any
 purpose with or without fee is hereby granted.
 
-THE SOFTWARE IS PROVIDED \\"AS IS\\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
 REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
 AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
 INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
@@ -26,7 +26,7 @@ PERFORMANCE OF THIS SOFTWARE.",
 `;
 
 exports[`gets text for license definition ignore filtered package 2`] = `
-Array [
+[
   "tslib@2.4.0/package.json",
   "tslib@2.4.0/LICENSE.txt",
   "tslib@2.4.0/tslib.js",

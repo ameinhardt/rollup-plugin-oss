@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`gets licenses from package attribute #1 object 1`] = `
-Object {
-  "infos": Array [
-    Object {
+{
+  "infos": [
+    {
       "license": "ISC",
     },
   ],
@@ -16,9 +16,9 @@ exports[`gets licenses from package attribute #2 object 1`] = `[TypeError: can't
 exports[`gets licenses from package attribute #3 MIT OR GPL-2.0 AND ISC 1`] = `[Error: can't unambiguously parse license definition]`;
 
 exports[`gets licenses from package attribute #4 BSD-3-Clause 1`] = `
-Object {
-  "infos": Array [
-    Object {
+{
+  "infos": [
+    {
       "license": "BSD-3-Clause",
     },
   ],
@@ -27,17 +27,17 @@ Object {
 `;
 
 exports[`gets licenses from package attribute #5 (MIT AND (LGPL-2.1+ AND BSD-3-Clause WITH GPL-3.0-linking-exception)) 1`] = `
-Object {
-  "infos": Array [
-    Object {
+{
+  "infos": [
+    {
       "exception": "GPL-3.0-linking-exception",
       "license": "BSD-3-Clause",
     },
-    Object {
+    {
       "license": "LGPL-2.1",
       "plus": true,
     },
-    Object {
+    {
       "license": "MIT",
     },
   ],
