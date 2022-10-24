@@ -7,7 +7,7 @@ import nearley from 'nearley';
 import { OutputPlugin } from 'rollup';
 import Packer from 'zip-stream';
 import spdxExpression from './spdxExpression';
-import { LicenseDependency, PluginConfig, Repository, SpdxInfo, LicenseInfo, ConjuctionInfo, LicenseDatabase } from './types';
+import { LicenseDependency, PluginConfig, Repository, SpdxInfo, LicenseInfo, ConjuctionInfo, LicenseDatabase, packageJsonType, License } from './types';
 
 const moduleRe = /^(.*[/\\]node_modules[/\\]((?:@[^/\\]+[/\\])?[^/\\]+))[/\\]([^#?]+)/,
   licenseRe = /^li[cs]ense/i,
@@ -122,18 +122,31 @@ function getVersionName(cache: LicenseDependency) {
   return `${cache.meta.name}@${cache.meta.version}`;
 }
 
+function getMeta(packageData: packageJsonType, licenseText?:string) : License  {
+  const { license, infos } = getLicenses(packageData.license || packageData.licenses);
+  return {
+    name: packageData.name,
+    version: packageData.version,
+    author: packageData.author,
+    license,
+    licenseText: packageData.licenseText || licenseText || getLicenseText(infos),
+    repository: getRepository(packageData.repository),
+    description: packageData.description
+  };
+}
+
 async function aggregateFiles(moduleIds: Array<string>, packerFunction?: (content: Buffer | ReadStream | string, name: string) => void, filter?: RegExp | string) {
-  const libraryMap: Map<string, LicenseDependency> = new Map();
+  const libraryMap: Map<string, LicenseDependency | null> = new Map();
   for (const moduleId of moduleIds) {
     const splitPath = moduleId.match(moduleRe);
     if (!splitPath) {
       continue;
     }
     const [, modulePath, moduleName, fileName] = splitPath;
-    if (filter && !!~moduleName.search(filter)) {
+    let cache = libraryMap.get(modulePath);
+    if ((filter && !!~moduleName.search(filter)) || cache === null) { // if filtered or ran into error
       continue;
     }
-    let cache = libraryMap.get(modulePath);
     if (!cache) {
       try {
         const files: Set<string> = new Set(),
@@ -142,17 +155,9 @@ async function aggregateFiles(moduleIds: Array<string>, packerFunction?: (conten
             getLicenseFile(modulePath)
           ]),
           packageData = JSON.parse(packageJson.toString()),
-          { license, infos } = getLicenses(packageData.license || packageData.licenses);
+          meta = getMeta(packageData, licenseFile?.text);
         cache = {
-          meta: {
-            name: packageData.name,
-            version: packageData.version,
-            author: packageData.author,
-            license,
-            licenseText: packageData.licenseText || licenseFile?.text || getLicenseText(infos),
-            repository: getRepository(packageData.repository),
-            description: packageData.description
-          },
+          meta,
           files
         };
         files.add('package.json');
@@ -161,10 +166,12 @@ async function aggregateFiles(moduleIds: Array<string>, packerFunction?: (conten
           files.add(licenseFile.fileName);
           await packerFunction?.(licenseFile.text, `${getVersionName(cache)}/${licenseFile.fileName}`);
         }
-        libraryMap.set(modulePath, cache);
       } catch (error) {
         console.error(`can't read package ${moduleName}. Skipping`, error);
+        cache = null;
         continue;
+      } finally {
+        libraryMap.set(modulePath, cache ?? null);
       }
     }
     if (cache.files.has(fileName)) {
@@ -180,7 +187,7 @@ async function aggregateFiles(moduleIds: Array<string>, packerFunction?: (conten
       continue;
     }
   }
-  return [...libraryMap.values()].map(({ meta }) => meta);
+  return [...libraryMap.values()].filter(Boolean).map((dependency) => dependency?.meta);
 }
 
 async function assureDirectory(filepath: string) : Promise<boolean> {
@@ -228,6 +235,6 @@ function LicensePlugin({ filter, extra = [], jsonFilename = 'disclosure.json', z
   };
 }
 
-export { aggregateFiles, getLicenses, getLicenseText, getRepository };
+export { aggregateFiles, getLicenses, getMeta, getLicenseText, getRepository };
 
 export default LicensePlugin;

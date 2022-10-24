@@ -42,3 +42,14 @@ export interface LicenseDatabase {
   licenses: Record<string, string>,
   exceptions: Record<string, string>
 }
+
+export type packageJsonType = {
+  name: string;
+  version: string;
+  description: string;
+  author: string;
+  license: string;
+  licenses: Record<string, string>;
+  licenseText: string;
+  repository: Repository;
+};
