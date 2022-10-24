@@ -235,6 +235,6 @@ function LicensePlugin({ filter, extra = [], jsonFilename = 'disclosure.json', z
   };
 }
 
-export { aggregateFiles, getLicenses, getMeta, getLicenseText, getRepository };
+export { aggregateFiles, getLicenses, getMeta, getLicenseText, getRepository, getLicenseFile };
 
 export default LicensePlugin;
