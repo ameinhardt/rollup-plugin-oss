@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-oss",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "A rollup plugin to list dependency licenses and zip source files",
   "author": "Axel Meinhardt",
   "license": "MIT",
@@ -17,7 +17,8 @@
   "files": [
     "spdxExpression.js",
     "spdx.json",
-    "index.d.ts"
+    "index.d.ts",
+    "types.d.ts"
   ],
   "scripts": {
     "lint": "eslint --fix --ext .js,.ts,.json .",

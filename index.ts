@@ -136,7 +136,7 @@ function getMeta(packageData: packageJsonType, licenseText?:string) : License  {
 }
 
 async function aggregateFiles(moduleIds: Array<string>, packerFunction?: (content: Buffer | ReadStream | string, name: string) => void, filter?: RegExp | string) {
-  const libraryMap: Map<string, LicenseDependency | null> = new Map();
+  const libraryMap: Map<string, LicenseDependency | null> = new Map(); // undefined = not yet seen, null = error
   for (const moduleId of moduleIds) {
     const splitPath = moduleId.match(moduleRe);
     if (!splitPath) {
