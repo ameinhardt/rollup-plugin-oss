@@ -21,8 +21,6 @@ export default {
       preferBuiltins: true
     }),
     Typescript({
-      module: 'ESNext',
-      target: 'ES6',
       declaration: false
     }),
     LicensePlugin({

@@ -2,7 +2,7 @@
 /// <reference types="node" />
 import { ReadStream } from 'node:fs';
 import { OutputPlugin } from 'rollup';
-import { PluginConfig, Repository, LicenseInfo, packageJsonType, License } from './types';
+import type { PluginConfig, Repository, LicenseInfo, packageJsonType, License } from './types.js';
 declare function getLicenses(license: Record<string, string> | string): {
     infos: Array<LicenseInfo>;
     license: string;

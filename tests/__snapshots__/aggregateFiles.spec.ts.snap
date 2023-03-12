@@ -20,15 +20,15 @@ OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.",
     "name": "tslib",
     "repository": "https://github.com/Microsoft/tslib",
-    "version": "2.4.0",
+    "version": "2.5.0",
   },
 ]
 `;
 
 exports[`gets text for license definition ignore filtered package 2`] = `
 [
-  "tslib@2.4.0/package.json",
-  "tslib@2.4.0/LICENSE.txt",
-  "tslib@2.4.0/tslib.js",
+  "tslib@2.5.0/package.json",
+  "tslib@2.5.0/LICENSE.txt",
+  "tslib@2.5.0/tslib.js",
 ]
 `;

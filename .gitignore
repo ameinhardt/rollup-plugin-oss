@@ -4,6 +4,6 @@ dist/
 .rollup.cache
 example/
 spdxExpression.*ts
-spdxExpression.js
+spdxExpression.*js
 index.js
 spdx.json

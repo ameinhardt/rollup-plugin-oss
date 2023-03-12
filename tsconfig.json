@@ -4,14 +4,14 @@
     "declaration": true,
     "esModuleInterop": true,
     "lib": ["ESNext"],
-    "module": "CommonJS",
+    "target": "ESNext",
+    "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
-    "target": "ES6",
     "types": ["node", "jest"]
   },
   "include": [
-    "./*.ts"
+    "./index.ts", "./*.d.ts"
   ],
   "exclude": ["node_modules", "dist"]
 }

@@ -44,5 +44,7 @@ async function buildLicenseParser() {
   writeFile(outfile, generate(c));
 }
 
+// eslint-disable-next-line unicorn/prefer-top-level-await
 buildLicenseDatabase();
+// eslint-disable-next-line unicorn/prefer-top-level-await
 buildLicenseParser();

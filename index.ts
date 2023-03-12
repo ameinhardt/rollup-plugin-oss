@@ -2,17 +2,17 @@
 import { createReadStream, createWriteStream, readFileSync, ReadStream } from 'node:fs';
 import { access, readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import util from 'node:util';
 import nearley from 'nearley';
 import { OutputPlugin } from 'rollup';
 import Packer from 'zip-stream';
-import spdxExpression from './spdxExpression';
-import { LicenseDependency, PluginConfig, Repository, SpdxInfo, LicenseInfo, ConjuctionInfo, LicenseDatabase, packageJsonType, License } from './types';
+import spdxExpression from './spdxExpression.js';
+import type { LicenseDependency, PluginConfig, Repository, SpdxInfo, LicenseInfo, ConjuctionInfo, LicenseDatabase, packageJsonType, License } from './types.js';
 
 const moduleRe = /^(.*[/\\]node_modules[/\\]((?:@[^/\\]+[/\\])?[^/\\]+))[/\\]([^#?]+)/,
   licenseRe = /^li[cs]ense/i,
-  // eslint-disable-next-line unicorn/prefer-module
-  spdxData = readFileSync(join(__dirname, '/spdx.json')),
+  spdxData = readFileSync(join(dirname(fileURLToPath(import.meta.url)), '/spdx.json')),
   spdxLicenseList : LicenseDatabase = JSON.parse(spdxData.toString());
 
 function * flatten(ast: SpdxInfo, key: 'license' | 'conjunction') : Generator<SpdxInfo> {
@@ -104,12 +104,12 @@ function getLicenseText(infos: LicenseInfo[]) {
   let licenseText = '';
   for (const info of infos) {
     if (!spdxLicenseList.licenses[info.license]) {
-      throw new Error(`can't find license text for "${info.license}}"`);
+      throw new Error(`can't find license text for "${info.license}"`);
     }
     licenseText += `${spdxLicenseList.licenses[info.license]}\n`;
     if (info.exception) {
       if (!spdxLicenseList.exceptions[info.exception]) {
-        throw new Error(`can't find exception text for "${info.exception}}"`);
+        throw new Error(`can't find exception text for "${info.exception}"`);
       }
       licenseText += `${spdxLicenseList.exceptions[info.exception]}\n`;
     }

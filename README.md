@@ -52,13 +52,12 @@ Tests are run by [jest](https://jestjs.io/). If test coverage shows 0%, try to d
 ## Example output
 Get an example output for this library by running cloning the repository (with `--recurse-submodules`)
 ```bash
-npm install   # links self reference
+npm install
 npm run build # prebuilds automatically
 npm run bundle
 ```
 or for pnpm
 ``` bash
-pnpm link .   # needs to link and install explicitly
 pnpm prebuild # trigger prebuild explicitly
 pnpm build
 pnpm bundle

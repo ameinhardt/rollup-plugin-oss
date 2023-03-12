@@ -1,10 +1,15 @@
-/* eslint-disable eslint-comments/disable-enable-pair,unicorn/prefer-module */
+/* eslint-disable eslint-comments/disable-enable-pair */
+import { createRequire } from 'node:module';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { aggregateFiles } from '../index';
+
+const { resolve } = createRequire(dirname(fileURLToPath(import.meta.url)));
 
 describe('gets text for license definition', function() {
   it('fixed given license text', async function() {
     const libraries = await aggregateFiles(
-      ['tslib', '@ameinhardt/eslint-config', '@ameinhardt/eslint-config/typescript'].map((file) => require.resolve(file))
+      ['tslib', '@ameinhardt/eslint-config', '@ameinhardt/eslint-config/typescript'].map((file) => resolve(file))
     );
     expect(libraries).toBeInstanceOf(Array);
     for (const value of libraries) {
@@ -25,13 +30,13 @@ describe('gets text for license definition', function() {
   });
 
   it('ignore filtered package', async function() {
-    const libraries = await aggregateFiles([require.resolve('tslib')], undefined, /ts/);
+    const libraries = await aggregateFiles([resolve('tslib')], undefined, /ts/);
     expect(libraries.length).toBe(0);
   });
 
   it('ignore filtered package', async function() {
     const packerArguments : Array<string> = [],
-      result = await aggregateFiles([require.resolve('tslib')], (data, filename) => packerArguments.push(filename));
+      result = await aggregateFiles([resolve('tslib')], (data, filename) => packerArguments.push(filename));
     expect(result).toMatchSnapshot();
     expect(packerArguments).toMatchSnapshot();
   });

@@ -1,14 +1,20 @@
-/* eslint-disable unicorn/prefer-module, eslint-comments/disable-enable-pair */
-module.exports = async () => {
+/* eslint-disable eslint-comments/disable-enable-pair */
+export default async () => {
   return {
-    verbose: true,
-    preset: 'ts-jest',
+    verbose: false,
+    preset: 'ts-jest/presets/default-esm',
+    transform: {
+      '^.+\\.tsx?$': [
+        'ts-jest',
+        {
+          tsconfig: 'tsconfig.json',
+          useESM: true
+        }
+      ]
+    },
     moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
     collectCoverage: true,
     collectCoverageFrom: ['index.ts'],
-    transform: {
-      '\\.ts$': 'ts-jest'
-    },
     coverageThreshold: {
       global: {
         branches: 80,
