@@ -28,11 +28,11 @@ jobs:
       - name: Build helpers
         run: pnpm prebuild
 
-      - name: Run tests
-        run: pnpm test
-
       - name: Build library
         run: pnpm build
+
+      - name: Run tests
+        run: pnpm test
 
       - name: Publish to npm
         run: pnpm publish --access public --no-git-checks
