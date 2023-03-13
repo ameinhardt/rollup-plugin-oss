@@ -1,4 +1,4 @@
-import { getRepository } from '../index';
+import { getRepository } from '../index.js';
 
 // https://docs.npmjs.com/cli/v8/configuring-npm/package-json#repository
 const possibleValues = [

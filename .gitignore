@@ -6,4 +6,5 @@ example/
 spdxExpression.*ts
 spdxExpression.*js
 index.js
+index.d.ts
 spdx.json

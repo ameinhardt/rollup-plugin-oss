@@ -5,7 +5,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import util from 'node:util';
 import nearley from 'nearley';
-import { OutputPlugin } from 'rollup';
+import type { OutputPlugin } from 'rollup';
 import Packer from 'zip-stream';
 import spdxExpression from './spdxExpression.js';
 import type { LicenseDependency, PluginConfig, Repository, SpdxInfo, LicenseInfo, ConjuctionInfo, LicenseDatabase, packageJsonType, License } from './types.js';

@@ -1,4 +1,4 @@
-import { getLicenseText } from '../index';
+import { getLicenseText } from '../index.js';
 
 describe('gets text for license definition', function() {
   it('fixed given license text', function() {

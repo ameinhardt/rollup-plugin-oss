@@ -47,7 +47,7 @@ export default {
 ```
 
 ## Test
-Tests are run by [jest](https://jestjs.io/). If test coverage shows 0%, try to delete the compiled `index.js` first.
+Tests are run by [jest](https://jestjs.io/) against the outcome of the build process, i.e. `index.js`.
 
 ## Example output
 Get an example output for this library by running cloning the repository (with `--recurse-submodules`)

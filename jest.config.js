@@ -14,7 +14,7 @@ export default async () => {
     },
     moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
     collectCoverage: true,
-    collectCoverageFrom: ['index.ts'],
+    collectCoverageFrom: ['index.js'],
     coverageThreshold: {
       global: {
         branches: 80,
