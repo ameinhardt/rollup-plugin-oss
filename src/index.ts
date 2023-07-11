@@ -7,7 +7,7 @@ import util from 'node:util';
 import nearley from 'nearley';
 import type { OutputPlugin } from 'rollup';
 import Packer from 'zip-stream';
-import spdxExpression from './spdxExpression.js';
+import spdxExpression from './spdxExpression';
 import type { LicenseDependency, PluginConfig, Repository, SpdxInfo, LicenseInfo, ConjuctionInfo, LicenseDatabase, packageJsonType, License } from './types.js';
 
 const moduleRe = /^(.*[/\\]node_modules[/\\]((?:@[^/\\]+[/\\])?[^/\\]+))[/\\]([^#?]+)/,

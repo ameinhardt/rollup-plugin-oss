@@ -1,4 +1,4 @@
-import { getLicenses } from '../index.js';
+import { getLicenses } from '../src/index';
 
 const possibleValues = [
   {

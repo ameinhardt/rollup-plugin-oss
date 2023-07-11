@@ -2,7 +2,7 @@
 import { createRequire } from 'node:module';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { aggregateFiles } from '../index.js';
+import { aggregateFiles } from '../src/index';
 
 const { resolve } = createRequire(dirname(fileURLToPath(import.meta.url)));
 
