@@ -3,15 +3,16 @@
     "baseUrl": ".",
     "declaration": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
     "lib": ["ESNext"],
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "strict": true,
     "types": ["node", "jest"]
   },
   "include": [
-    "./index.ts", "./*.d.ts"
+    "./src/*.ts"
   ],
   "exclude": ["node_modules", "dist"]
 }

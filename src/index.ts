@@ -12,7 +12,7 @@ import type { LicenseDependency, PluginConfig, Repository, SpdxInfo, LicenseInfo
 
 const moduleRe = /^(.*[/\\]node_modules[/\\]((?:@[^/\\]+[/\\])?[^/\\]+))[/\\]([^#?]+)/,
   licenseRe = /^li[cs]ense/i,
-  spdxData = readFileSync(join(dirname(fileURLToPath(import.meta.url)), '/spdx.json')),
+  spdxData = readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../spdx.json')),
   spdxLicenseList : LicenseDatabase = JSON.parse(spdxData.toString());
 
 function * flatten(ast: SpdxInfo, key: 'license' | 'conjunction') : Generator<SpdxInfo> {

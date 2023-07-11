@@ -7,7 +7,7 @@ import Typescript from '@rollup/plugin-typescript';
 import LicensePlugin from 'rollup-plugin-oss';
 
 export default {
-  input: './index.ts',
+  input: './src/index.ts',
   external: [...builtinModules.flatMap(p => [p, `node:${p}`])],
   output: {
     dir: './example',
