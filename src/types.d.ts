@@ -1,55 +1,55 @@
 export interface License {
-  name: string;
-  version: string;
-  author?: string;
-  license: string;
-  licenseText?: string;
-  repository: string;
-  description?: string;
+  author?: string
+  description?: string
+  license: string
+  licenseText?: string
+  name: string
+  repository: string
+  version: string
 }
 
 export interface PluginConfig {
-  filter?: RegExp | string;
-  extra?: Array<License>,
-  zipFilename?: string | null;
-  jsonFilename?: string | null;
+  extra?: Array<License>
+  filter?: RegExp | string
+  jsonFilename?: null | string
+  zipFilename?: null | string
 }
 
 export interface LicenseDependency {
-  meta: License;
   files: Set<string>
+  meta: License
 }
 
-export type Repository = string | {
-    type: string;
-    url: string;
-    directory?: string;
-}
+export type Repository = {
+  directory?: string
+  type: string
+  url: string
+} | string;
 export interface LicenseInfo {
-    license: string;
-    exception?: string;
-    plus?: true;
+  exception?: string
+  license: string
+  plus?: true
 }
 export interface ConjuctionInfo {
-    conjunction: 'and' | 'or';
-    left: LicenseInfo | ConjuctionInfo;
-    right: LicenseInfo | ConjuctionInfo;
+  conjunction: 'and' | 'or'
+  left: ConjuctionInfo | LicenseInfo
+  right: ConjuctionInfo | LicenseInfo
 }
 
-export type SpdxInfo = LicenseInfo | ConjuctionInfo;
+export type SpdxInfo = ConjuctionInfo | LicenseInfo;
 
 export interface LicenseDatabase {
-  licenses: Record<string, string>,
   exceptions: Record<string, string>
+  licenses: Record<string, string>
 }
 
-export type packageJsonType = {
-  name: string;
-  version: string;
-  description: string;
-  author: string;
-  license: string;
-  licenses: Record<string, string>;
-  licenseText: string;
-  repository: Repository;
-};
+export interface packageJsonType {
+  author: string
+  description: string
+  license: string
+  licenses: Record<string, string>
+  licenseText: string
+  name: string
+  repository: Repository
+  version: string
+}

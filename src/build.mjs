@@ -32,8 +32,8 @@ async function buildLicenseDatabase() {
   }
   console.info(`database: writing ${outfile}`);
   await writeFile(resolve(srcDir, outfile), JSON.stringify({
-    licenses,
-    exceptions
+    exceptions,
+    licenses
   }, null, 2));
 }
 
@@ -48,7 +48,6 @@ async function buildLicenseParser() {
   writeFile(resolve(srcDir, outfile), generate(c));
 }
 
-// eslint-disable-next-line unicorn/prefer-top-level-await
 buildLicenseDatabase();
-// eslint-disable-next-line unicorn/prefer-top-level-await
+
 buildLicenseParser();

@@ -7,8 +7,8 @@ import Typescript from '@rollup/plugin-typescript';
 import LicensePlugin from 'rollup-plugin-oss';
 
 export default {
+  external: [...builtinModules.flatMap((p) => [p, `node:${p}`])],
   input: './src/index.ts',
-  external: [...builtinModules.flatMap(p => [p, `node:${p}`])],
   output: {
     dir: './example',
     exports: 'named',
@@ -25,12 +25,12 @@ export default {
     }),
     LicensePlugin({
       extra: [{
+        author: 'Linux Foundation and its Contributors',
+        description: 'The SPDX License List is a list of commonly found licenses and exceptions used for open source and other collaborative software.  The XML format is an internal representation of the licenses.  See the license-list-data for supported formats for the license list.',
         license: 'CC0-1.0',
         name: 'license-list-xml',
         repository: 'https://github.com/spdx/license-list-XML',
-        version: '2.6.0',
-        author: 'Linux Foundation and its Contributors',
-        description: 'The SPDX License List is a list of commonly found licenses and exceptions used for open source and other collaborative software.  The XML format is an internal representation of the licenses.  See the license-list-data for supported formats for the license list.'
+        version: '2.6.0'
       }]
     })
   ]

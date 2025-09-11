@@ -1,21 +1,23 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-import { createReadStream, createWriteStream, readFileSync, ReadStream } from 'node:fs';
-import { access, readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
+import type { Buffer } from 'node:buffer';
+import type { ReadStream } from 'node:fs';
+import type { OutputPlugin } from 'rollup';
+import type { ConjuctionInfo, License, LicenseDatabase, LicenseDependency, LicenseInfo, packageJsonType, PluginConfig, Repository, SpdxInfo } from './types.js';
+import { createReadStream, createWriteStream, readFileSync } from 'node:fs';
+import { access, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
+import { cwd } from 'node:process';
 import { fileURLToPath } from 'node:url';
 import util from 'node:util';
 import nearley from 'nearley';
-import type { OutputPlugin } from 'rollup';
 import Packer from 'zip-stream';
 import spdxExpression from './spdxExpression';
-import type { LicenseDependency, PluginConfig, Repository, SpdxInfo, LicenseInfo, ConjuctionInfo, LicenseDatabase, packageJsonType, License } from './types.js';
 
 const moduleRe = /^(.*[/\\]node_modules[/\\]((?:@[^/\\]+[/\\])?[^/\\]+))[/\\]([^#?]+)/,
   licenseRe = /^li[cs]ense/i,
   spdxData = readFileSync(join(dirname(fileURLToPath(import.meta.url)), '../spdx.json')),
-  spdxLicenseList : LicenseDatabase = JSON.parse(spdxData.toString());
+  spdxLicenseList: LicenseDatabase = JSON.parse(spdxData.toString());
 
-function * flatten(ast: SpdxInfo, key: 'license' | 'conjunction') : Generator<SpdxInfo> {
+function* flatten(ast: SpdxInfo, key: 'conjunction' | 'license'): Generator<SpdxInfo> {
   if (Object.prototype.hasOwnProperty.call(ast, 'license')) {
     const licenseInfo = ast as LicenseInfo;
     if (key === 'license') {
@@ -24,10 +26,10 @@ function * flatten(ast: SpdxInfo, key: 'license' | 'conjunction') : Generator<Sp
   } else {
     const conjuctionInfo = ast as ConjuctionInfo;
     if (conjuctionInfo.right) {
-      yield * flatten(conjuctionInfo.right, key);
+      yield* flatten(conjuctionInfo.right, key);
     }
     if (conjuctionInfo.left) {
-      yield * flatten(conjuctionInfo.left, key);
+      yield* flatten(conjuctionInfo.left, key);
     }
     if (key === 'conjunction') {
       yield conjuctionInfo;
@@ -35,21 +37,21 @@ function * flatten(ast: SpdxInfo, key: 'license' | 'conjunction') : Generator<Sp
   }
 }
 
-function getLicenses(license: Record<string, string> | string) : { infos: Array<LicenseInfo>, license: string } {
+function getLicenses(license: Record<string, string> | string): { infos: Array<LicenseInfo>, license: string } {
   if (typeof license === 'object' && typeof license.type) {
     license = license.type;
   }
   if (typeof license !== 'string') {
-    throw new TypeError("can't parse license");
+    throw new TypeError('can\'t parse license');
   }
   const parser = new nearley.Parser(nearley.Grammar.fromCompiled(spdxExpression));
   try {
     parser.feed(license);
   } catch {
-    throw new Error("can't parse license definition");
+    throw new Error('can\'t parse license definition');
   }
   if (parser.results.length !== 1) {
-    throw new Error("can't unambiguously parse license definition");
+    throw new Error('can\'t unambiguously parse license definition');
   }
   const parsedSpdx = parser.results[0];
   for (const { conjunction } of flatten(parsedSpdx, 'conjunction') as Generator<ConjuctionInfo>) {
@@ -63,7 +65,7 @@ function getLicenses(license: Record<string, string> | string) : { infos: Array<
   };
 }
 
-async function getLicenseFile(modulePath: string): Promise<{ fileName: string, text: string} | undefined> {
+async function getLicenseFile(modulePath: string): Promise<{ fileName: string, text: string } | undefined> {
   const list = await readdir(modulePath),
     fileName = list.find((f) => f.match(licenseRe));
   if (fileName) {
@@ -73,7 +75,7 @@ async function getLicenseFile(modulePath: string): Promise<{ fileName: string, t
 }
 
 // parses https://docs.npmjs.com/cli/v8/configuring-npm/package-json#repository to a simple string
-function getRepository(repository: Repository) : string {
+function getRepository(repository: Repository): string {
   if (typeof repository === 'object') {
     repository = repository.url;
   }
@@ -122,16 +124,16 @@ function getVersionName(cache: LicenseDependency) {
   return `${cache.meta.name}@${cache.meta.version}`;
 }
 
-function getMeta(packageData: packageJsonType, licenseText?:string) : License  {
-  const { license, infos } = getLicenses(packageData.license || packageData.licenses);
+function getMeta(packageData: packageJsonType, licenseText?: string): License {
+  const { infos, license } = getLicenses(packageData.license || packageData.licenses);
   return {
-    name: packageData.name,
-    version: packageData.version,
     author: packageData.author,
+    description: packageData.description,
     license,
     licenseText: packageData.licenseText || licenseText || getLicenseText(infos),
+    name: packageData.name,
     repository: getRepository(packageData.repository),
-    description: packageData.description
+    version: packageData.version
   };
 }
 
@@ -157,8 +159,8 @@ async function aggregateFiles(moduleIds: Array<string>, packerFunction?: (conten
           packageData = JSON.parse(packageJson.toString()),
           meta = getMeta(packageData, licenseFile?.text);
         cache = {
-          meta,
-          files
+          files,
+          meta
         };
         files.add('package.json');
         await packerFunction?.(packageJson, `${getVersionName(cache)}/package.json`);
@@ -190,7 +192,7 @@ async function aggregateFiles(moduleIds: Array<string>, packerFunction?: (conten
   return [...libraryMap.values()].filter(Boolean).map((dependency) => dependency?.meta);
 }
 
-async function assureDirectory(filepath: string) : Promise<boolean> {
+async function assureDirectory(filepath: string): Promise<boolean> {
   const directory = dirname(filepath);
   try {
     await access(directory);
@@ -202,11 +204,10 @@ async function assureDirectory(filepath: string) : Promise<boolean> {
 }
 
 /* istanbul ignore next */
-function LicensePlugin({ filter, extra = [], jsonFilename = 'disclosure.json', zipFilename = 'src.zip' }: PluginConfig = {}) : OutputPlugin {
+function LicensePlugin({ extra = [], filter, jsonFilename = 'disclosure.json', zipFilename = 'src.zip' }: PluginConfig = {}): OutputPlugin {
   return {
-    name: 'rollup-plugin-license',
     async generateBundle(outputOptions) {
-      const outDirectory = outputOptions.dir ?? (outputOptions.file && dirname(outputOptions.file)) ?? process.cwd(),
+      const outDirectory = outputOptions.dir ?? (outputOptions.file && dirname(outputOptions.file)) ?? cwd(),
         moduleIds = [...this.getModuleIds()].filter(
           (moduleId) => !moduleId.startsWith('\0') && this.getModuleInfo(moduleId)?.isIncluded
         );
@@ -231,10 +232,11 @@ function LicensePlugin({ filter, extra = [], jsonFilename = 'disclosure.json', z
           libraries: [...libraries, ...extra]
         }, null, 2));
       }
-    }
+    },
+    name: 'rollup-plugin-license'
   };
 }
 
-export { aggregateFiles, getLicenses, getMeta, getLicenseText, getRepository, getLicenseFile };
+export { aggregateFiles, getLicenseFile, getLicenses, getLicenseText, getMeta, getRepository };
 
 export default LicensePlugin;

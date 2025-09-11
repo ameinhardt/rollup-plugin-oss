@@ -22,6 +22,7 @@ npm install -D rollup-plugin-oss
 Add a rollup/vite config (e.g. rollup.config.js) to your project. Add `filter` to hide dependencies, add `extra` manually or adjust the output of the zip or json files.
 ```javascript
 import LicensePlugin from 'rollup-plugin-oss';
+
 export default {
   input: 'src/main.js',
   output: {
@@ -30,24 +31,24 @@ export default {
   },
   plugins: [
     LicensePlugin({
-      filter: /@mycompany\/.*/,
       extra: [{
+        author: 'Linux Foundation and its Contributors',
+        description: 'The SPDX License List is a list of commonly found licenses and exceptions used for open source and other collaborative software.  The XML format is an internal representation of the licenses.  See the license-list-data for supported formats for the license list.',
         license: 'CC0-1.0',
         name: 'license-list-xml',
         repository: 'https://github.com/spdx/license-list-XML',
-        version: '2.6.0',
-        author: 'Linux Foundation and its Contributors',
-        description: 'The SPDX License List is a list of commonly found licenses and exceptions used for open source and other collaborative software.  The XML format is an internal representation of the licenses.  See the license-list-data for supported formats for the license list.'
+        version: '2.6.0'
       }],
-      zipFilename: 'src.zip',
-      jsonFilename: 'disclosure.json'
+      filter: /@mycompany\/.*/,
+      jsonFilename: 'disclosure.json',
+      zipFilename: 'src.zip'
     })
   ]
 };
 ```
 
 ## Test
-Tests are run by [jest](https://jestjs.io/) against the outcome of the build process, i.e. `index.js`.
+Tests are run against the outcome of the build process, i.e. `index.js`.
 
 ## Example output
 Get an example output for this library by running cloning the repository (with `--recurse-submodules`)
@@ -74,8 +75,8 @@ In `./example` folder, you'll get a `disclosure.json` file with:
       "licenseText": "Copyright (c) Microsoft Corporation.\r\n\r\nPermission to use, copy, modify, and/or distribute this software for any\r\npurpose with or without fee is hereby granted.\r\n\r\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH\r\nREGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY\r\nAND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,\r\nINDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM\r\nLOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR\r\nOTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR\r\nPERFORMANCE OF THIS SOFTWARE.",
       "repository": "https://github.com/Microsoft/tslib",
       "description": "Runtime library for TypeScript helper functions"
-    },
-    ...
+    }
+    // ...
   ]
 }
 ```
