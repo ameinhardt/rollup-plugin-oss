@@ -168,8 +168,8 @@ async function aggregateFiles(moduleIds: Array<string>, packerFunction?: (conten
           files.add(licenseFile.fileName);
           await packerFunction?.(licenseFile.text, `${getVersionName(cache)}/${licenseFile.fileName}`);
         }
-      } catch (error) {
-        console.error(`can't read package ${moduleName}. Skipping`, error);
+      } catch {
+        console.error(`can't read package ${moduleName}. Skipping`);
         cache = null;
         continue;
       } finally {
