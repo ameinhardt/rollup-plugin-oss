@@ -2,9 +2,8 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["ESNext"],
-    "baseUrl": ".",
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "types": ["node"],
     "strict": true,
     "declaration": true,
@@ -12,7 +11,9 @@
     "skipLibCheck": true
   },
   "include": [
-    "./src/*.ts"
+    "./*.d.ts",
+    "./src/*.ts",
+    "./tests/*.ts"
   ],
   "exclude": ["node_modules", "dist"]
 }

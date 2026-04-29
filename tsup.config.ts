@@ -8,7 +8,9 @@ export default defineConfig(async () => {
       'src/index.ts'
     ],
     format: ['cjs', 'esm'],
+    platform: 'node',
     shims: true,
-    splitting: true
+    splitting: true,
+    target: 'node18'
   };
 });

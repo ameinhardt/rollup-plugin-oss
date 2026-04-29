@@ -1,6 +1,6 @@
 import type { Buffer } from 'node:buffer';
 import type { ReadStream } from 'node:fs';
-import type { OutputPlugin } from 'rollup';
+import type { NormalizedOutputOptions, OutputPlugin, Plugin } from 'rollup';
 import type { ConjuctionInfo, License, LicenseDatabase, LicenseDependency, LicenseInfo, packageJsonType, PluginConfig, Repository, SpdxInfo } from './types.js';
 import { createReadStream, createWriteStream, readFileSync } from 'node:fs';
 import { access, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
@@ -182,7 +182,6 @@ async function aggregateFiles(moduleIds: Array<string>, packerFunction?: (conten
     }
     try {
       const fullPath = join(modulePath, fileName);
-      // await access(fullPath);
       await packerFunction?.(createReadStream(fullPath), `${getVersionName(cache)}/${fileName}`);
     } catch (error) {
       console.error(`can't read file ${getVersionName(cache)}/${fileName}. Skipping`, error);
@@ -203,40 +202,48 @@ async function assureDirectory(filepath: string): Promise<boolean> {
   }
 }
 
+function isModuleIncluded(this: { getModuleInfo: (id: string) => { isIncluded?: boolean | null } | null }, moduleId: string): boolean {
+  if (moduleId.startsWith('\0')) {
+    return false;
+  }
+  const info = this.getModuleInfo(moduleId);
+  return info !== null && info.isIncluded !== false;
+}
+
 /* istanbul ignore next */
-function LicensePlugin({ extra = [], filter, jsonFilename = 'disclosure.json', zipFilename = 'src.zip' }: PluginConfig = {}): OutputPlugin {
+function LicensePlugin({ extra = [], filter, jsonFilename = 'disclosure.json', zipFilename = 'src.zip' }: PluginConfig = {}): OutputPlugin & Plugin {
+  async function runBundle(this: { getModuleIds: () => IterableIterator<string>, getModuleInfo: (id: string) => { isIncluded?: boolean | null } | null }, outputOptions: NormalizedOutputOptions) {
+    const outDirectory = outputOptions.dir ?? (outputOptions.file && dirname(outputOptions.file)) ?? cwd(),
+      moduleIds = [...this.getModuleIds()].filter((moduleId) => isModuleIncluded.call(this, moduleId));
+    let libraries;
+    if (zipFilename != null) {
+      const zipFilePath = join(outDirectory, zipFilename),
+        zip = new Packer({
+          zlib: { level: 9 }
+        }),
+        zipEntry = util.promisify(zip.entry).bind(zip);
+      await assureDirectory(zipFilePath);
+      zip.pipe(createWriteStream(zipFilePath));
+      libraries = await aggregateFiles(moduleIds, (content, name) => zipEntry(content, { name }), filter);
+      zip?.finalize();
+    } else {
+      libraries = await aggregateFiles(moduleIds, undefined, filter);
+    }
+    if (jsonFilename != null) {
+      const jsonFilePath = join(outDirectory, jsonFilename);
+      await assureDirectory(jsonFilePath);
+      await writeFile(jsonFilePath, JSON.stringify({
+        libraries: [...libraries, ...extra]
+      }, null, 2));
+    }
+  }
+
   return {
-    async generateBundle(outputOptions) {
-      const outDirectory = outputOptions.dir ?? (outputOptions.file && dirname(outputOptions.file)) ?? cwd(),
-        moduleIds = [...this.getModuleIds()].filter(
-          (moduleId) => !moduleId.startsWith('\0') && this.getModuleInfo(moduleId)?.isIncluded
-        );
-      let libraries;
-      if (zipFilename != null) {
-        const zipFilePath = join(outDirectory, zipFilename),
-          zip = new Packer({
-            zlib: { level: 9 }
-          }),
-          zipEntry = util.promisify(zip.entry).bind(zip);
-        await assureDirectory(zipFilePath);
-        zip.pipe(createWriteStream(zipFilePath));
-        libraries = await aggregateFiles(moduleIds, (content, name) => zipEntry(content, { name }), filter);
-        zip?.finalize();
-      } else {
-        libraries = await aggregateFiles(moduleIds, undefined, filter);
-      }
-      if (jsonFilename != null) {
-        const jsonFilePath = join(outDirectory, jsonFilename);
-        await assureDirectory(jsonFilePath);
-        await writeFile(jsonFilePath, JSON.stringify({
-          libraries: [...libraries, ...extra]
-        }, null, 2));
-      }
-    },
+    generateBundle: runBundle,
     name: 'rollup-plugin-license'
   };
 }
 
-export { aggregateFiles, getLicenseFile, getLicenses, getLicenseText, getMeta, getRepository };
+export { aggregateFiles, getLicenseFile, getLicenses, getLicenseText, getMeta, getRepository, isModuleIncluded };
 
 export default LicensePlugin;
