@@ -6,6 +6,7 @@ export default config({
     // html: true,
   },
   jsx: false,
+  markdown: false,
   stylistic: {
     indent: 2,
     quotes: 'single'

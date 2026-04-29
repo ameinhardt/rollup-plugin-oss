@@ -18,7 +18,7 @@ const moduleRe = /^(.*[/\\]node_modules[/\\]((?:@[^/\\]+[/\\])?[^/\\]+))[/\\]([^
   spdxLicenseList: LicenseDatabase = JSON.parse(spdxData.toString());
 
 function* flatten(ast: SpdxInfo, key: 'conjunction' | 'license'): Generator<SpdxInfo> {
-  if (Object.prototype.hasOwnProperty.call(ast, 'license')) {
+  if (Object.hasOwn(ast, 'license')) {
     const licenseInfo = ast as LicenseInfo;
     if (key === 'license') {
       yield licenseInfo;

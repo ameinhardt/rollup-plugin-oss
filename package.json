@@ -61,20 +61,20 @@
     "zip-stream": "^7.0.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^5.3.0",
-    "@rollup/plugin-commonjs": "^28.0.6",
+    "@antfu/eslint-config": "^8.2.0",
+    "@rollup/plugin-commonjs": "^29.0.2",
     "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^16.0.1",
-    "@rollup/plugin-typescript": "^12.1.4",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-typescript": "^12.3.0",
     "@types/nearley": "^2.11.5",
-    "@types/node": "^24.3.1",
-    "eslint": "^9.35.0",
-    "eslint-plugin-format": "^1.0.1",
-    "lint-staged": "^16.1.6",
-    "rollup": "^4.50.1",
+    "@types/node": "^25.6.0",
+    "eslint": "^10.2.1",
+    "eslint-plugin-format": "^2.0.1",
+    "lint-staged": "^16.4.0",
+    "rollup": "^4.60.2",
     "tslib": "^2.8.1",
-    "tsup": "^8.5.0",
-    "tsx": "^4.20.5",
-    "typescript": "^5.9.2"
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
   }
 }

@@ -3,7 +3,11 @@ import { defineConfig } from 'tsup';
 export default defineConfig(async () => {
   return {
     clean: true,
-    dts: true,
+    dts: {
+      compilerOptions: {
+        ignoreDeprecations: '6.0'
+      }
+    },
     entry: [
       'src/index.ts'
     ],
